@@ -1,22 +1,18 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.views.generic.edit import FormView
 from apiclient.discovery import build
 from os import environ
 from .forms import SearchForm
 
-# Create your views here.
-def search(request):
-    if request.method == 'POST':
-        query = SearchForm(request.POST)
-        if query.is_valid():
-            search_text = query.data['search_query']
-            return HttpResponseRedirect(reverse('results', args=(search_text,)))
-    else:
-        query = SearchForm()
+class SearchView(FormView):
+    template_name = 'search.html'
+    form_class = SearchForm
 
-    query = SearchForm()
-    return render(request, 'search.html', {'query' : query})
+    def form_valid(self, form):
+        search_text = form.data['search_query']
+        return HttpResponseRedirect(reverse('results', args=(search_text,)))
 
 def results(request, search_text):
     #The api key is loaded in from environment vaiables
