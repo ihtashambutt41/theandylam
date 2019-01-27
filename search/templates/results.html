@@ -2,5 +2,29 @@
     <title> Search Results</title>
 </head>
 <body>
-    <p> You searched for "{{ search_text }}" </p>
+    <p> Found {{ books_found }} results for "{{ search_text }}". Showing the first ten results </p>
+    {% if book_list %}
+        <table>
+            {% for book in book_list %}
+            <tr>
+                <td>
+                    <a href="{{ book.volumeInfo.infoLink }}">
+                        <img src="{{ book.volumeInfo.imageLinks.thumbnail}}">
+                    </a>
+                </td>
+                <td>
+                        "{{book.volumeInfo.title}}" by {{book.volumeInfo.authors}} {{book.volumeInfo.publisher}}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No result found</p>
+    {% endif %}
+    <br>
+    <form action="{% url 'search' %}" method="post">
+            {% csrf_token %}
+            {{ query }}
+            <input type="submit" value="Search Again">
+    </form>
 </body>
