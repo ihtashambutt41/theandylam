@@ -13,7 +13,7 @@
                     </a>
                 </td>
                 <td>
-                        "{{book.volumeInfo.title}}" by {{book.volumeInfo.authors}} {{book.volumeInfo.publisher}}
+                        "{{book.volumeInfo.title}} {{book.volumeInfo.subtitle}}" by {{book.volumeInfo.authors}} {{book.volumeInfo.publisher}}
                 </td>
             </tr>
             {% endfor %}
@@ -22,9 +22,10 @@
         <p>No result found</p>
     {% endif %}
     <br>
-    <form action="{% url 'search' %}" method="post">
+    {% include "search.html" %}
+    <!-- <form action="{% url 'search' %}" method="post">
             {% csrf_token %}
             {{ query }}
             <input type="submit" value="Search Again">
-    </form>
+    </form> -->
 </body>
