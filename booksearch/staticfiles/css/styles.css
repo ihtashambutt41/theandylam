@@ -1,0 +1,10 @@
+.description {
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 400px;
+    text-overflow: ellipsis;
+}
+
+div {
+  padding: 25px;
+}
