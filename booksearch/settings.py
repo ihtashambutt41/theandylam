@@ -25,7 +25,7 @@ SECRET_KEY = 'fqvczb9wm8l2(t#7uhse&xlq8df4i^wym@3_l&$9igm8noh7^o'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['demo-book-search.herokuapp.com/']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
