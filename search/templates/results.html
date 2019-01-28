@@ -1,31 +1,43 @@
-<head>
-    <title> Search Results</title>
-</head>
-<body>
-    <p> Found {{ books_found }} results for "{{ search_text }}". Showing the first ten results </p>
+{% extends "generic_template.html" %}
+
+{% block content %}
+    <h1 style="padding:20px">Search Results</h1>
+    <h2 style="padding:20px"> Found {{ books_found }} results for "{{ search_text }}". Showing the first ten results </h2>
     {% if book_list %}
-        <table>
-            {% for book in book_list %}
-            <tr>
-                <td>
-                    <a href="{{ book.volumeInfo.infoLink }}">
-                        <img src="{{ book.volumeInfo.imageLinks.thumbnail}}">
-                    </a>
-                </td>
-                <td>
-                        "{{book.volumeInfo.title}} {{book.volumeInfo.subtitle}}" by {{book.volumeInfo.authors}} {{book.volumeInfo.publisher}}
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
+    <div class="row">
+        {% for book in book_list %}
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <img src="{{ book.volumeInfo.imageLinks.thumbnail}}" alt="{{book.volumeInfo.title}}">
+                        <div class="caption">
+
+                            <!-- Book Title -->
+                            <h3>{{book.volumeInfo.title}}</h3>
+                            <h4>{{book.volumeInfo.subtitle}}</h4>
+
+                            <!-- Authors -->
+                            {% for author in book.volumeInfo.authors %}
+                                <span class="label label-default">{{author}}</span>
+                            {% endfor %}
+
+                            <!-- Publisher -->
+                            <h5><i>{{book.volumeInfo.publisher}}</i></h5>
+
+                            <!-- Description (cut off at 40 words) -->
+                            {% if book.volumeInfo.description %}
+                                <p>{{ book.volumeInfo.description|truncatewords:40}}</p>
+                            {% else %}
+                                <p> No description available</p>
+                            {% endif %}
+                            <p><a href="{{ book.volumeInfo.infoLink }}" class="btn btn-primary" role="button">More Info</a>
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
     {% else %}
         <p>No result found</p>
     {% endif %}
     <br>
     {% include "search.html" %}
-    <!-- <form action="{% url 'search' %}" method="post">
-            {% csrf_token %}
-            {{ query }}
-            <input type="submit" value="Search Again">
-    </form> -->
-</body>
+{% endblock content%}

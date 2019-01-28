@@ -1,5 +1,21 @@
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Search">
-</form>
+{% extends "generic_template.html" %}
+
+{% block content %}
+    <div class="col-lg-6">
+        <h1>Book Search</h1>
+        <div class="col-lg-6">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class=input-group>
+                    {{ form }}
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock content%}
