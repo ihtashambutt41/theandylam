@@ -8,24 +8,24 @@
         {% for book in book_list %}
                 <div class="col-sm-6 col-md-3">
                     <div class="thumbnail">
-                        <img src="{{ book.volumeInfo.imageLinks.thumbnail}}" alt="{{book.volumeInfo.title}}">
+                        <img src="{{ book.volumeInfo.imageLinks.thumbnail}}" alt="{{book.volumeInfo.title | safe}}">
                         <div class="caption">
 
                             <!-- Book Title -->
-                            <h3>{{book.volumeInfo.title}}</h3>
-                            <h4>{{book.volumeInfo.subtitle}}</h4>
+                            <h3>{{book.volumeInfo.title | safe}}</h3>
+                            <h4>{{book.volumeInfo.subtitle | safe}}</h4>
 
                             <!-- Authors -->
                             {% for author in book.volumeInfo.authors %}
-                                <span class="label label-default">{{author}}</span>
+                                <span class="label label-default">{{author | safe}}</span>
                             {% endfor %}
 
                             <!-- Publisher -->
-                            <h5><i>{{book.volumeInfo.publisher}}</i></h5>
+                            <h5><i>{{book.volumeInfo.publisher | safe}}</i></h5>
 
                             <!-- Description (cut off at 40 words) -->
                             {% if book.volumeInfo.description %}
-                                <p>{{ book.volumeInfo.description|truncatewords:40}}</p>
+                                <p>{{ book.volumeInfo.description | truncatewords:40  | safe}}</p>
                             {% else %}
                                 <p> No description available</p>
                             {% endif %}
