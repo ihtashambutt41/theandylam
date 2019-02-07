@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1 style="padding:20px">Search Results</h1>
-    <h2 style="padding:20px"> Found {{ books_found }} results for "{{ search_text }}". Showing the first ten results </h2>
+    <h2 style="padding:20px"> Found {{ total_books }} results for "{{ search_text }}". Showing the first ten results </h2>
     {% if book_list %}
     <div class="row">
         {% for book in book_list %}
